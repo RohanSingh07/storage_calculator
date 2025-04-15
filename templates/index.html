@@ -302,7 +302,7 @@
             const form = e.target;
             const formData = new FormData(form);
 
-            fetch("http://localhost:8000/submit-camera-data", {
+            fetch("https://storage-calculator.onrender.com/submit-camera-data", {
                 method: "POST",
                 body: formData,
             })
