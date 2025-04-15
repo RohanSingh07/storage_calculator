@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="static/global.css" />
+    <link rel="stylesheet" href="static/styles.css" />
+    <script src="https://kit.fontawesome.com/44665516ea.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="desktop">
+      <div class="div1">
+        <div class="overlap"><div class="text-wrapper">AEROSKOP</div></div>
+      </div>
+      <div class="div2">
+        <p class="AI-powered">AI Powered Surveillance System &amp; Storage Calculator</p>
+        <div class="basic-req">Basic requirements</div>
+        <div class="MODEL-QUANTITY">
+            <p style="padding-left: 1vw;width: 10%;">MODEL</p>
+            <p style="width: 7%;">QUANTITY</p>
+            <p style="width: 10%;">STREAM MODE</p>
+            <p style="width: 7%;">STREAM</p>
+            <p style="width: 12%;">RESOLUTION</p>
+            <p style="width: 8%;">FRAME RATE</p>
+            <p style="width: 8%;">COMPRESSION</p>
+            <p style="width: 9%;">VIDEO QUALITY</p>
+            <p style="width: 8%;">BITRATE MODE</p>
+            <p style="width: 11%;">RECORDING HOURS</p>
+            <p style="width: 10%;">RETENTION DAYS</p>
+        </div>
+        <form id="cameraForm">
+            <div class="MODEL-BODY">
+                <div class="frame" id="camera1">
+                    <div class="frame1">
+                        <!-- Model -->
+                        <div class="overlap-3" style="width: 9%; border: 1px solid black; display: flex; justify-content: center; align-items: center;">
+                            <select name="model1" style="width: 100%; border: none; text-align: center;">
+                                <option value="GENERIC">GENERIC</option>
+                                <option value="AXIS">AXIS</option>
+                                <option value="HIKVISION">HIKVISION</option>
+                            </select>
+                        </div>
+                
+                        <!-- Camera Count -->
+                        <div class="overlap-4" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
+                            <input type="number" name="camera-count1" value="1" style="width: 100%; border: none; text-align: center;" />
+                        </div>
+                
+                        <!-- Stream Mode -->
+                        <div class="overlap-5" style="width: 10%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
+                            <select name="stream-mode1" style="width: 100%; border: none; text-align: center;"  onchange="toggleStream2(this)">
+                                <option value="SINGLE" selected>SINGLE STREAM</option>
+                                <option value="DUAL">DUAL STREAM</option>
+                            </select>
+                        </div>
+                
+                        <!-- Stream1 -->
+                        <div class="overlap-6" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
+                            <input type="text" name="stream1A" value="STREAM1" style="width: 100%; border: none; text-align: center;" />
+                        </div>
+                
+                        <!-- Resolution -->
+                        <div class="overlap-8" style="width: 11%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
+                            <select name="resolution1A" style="width: 100%; border: none; text-align: center;">
+                                <option selected>1980 x 1080</option>
+                                <option>1280 x 720</option>
+                                <option>640 x 480</option>
+                            </select>
+                        </div>
+                
+                        <!-- Frame Rate -->
+                        <div class="overlap-10" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 1.3vw;">
+                            <select name="fps1A" style="width: 100%; border: none; text-align: center;">
+                                <option selected>30fps</option>
+                                <option >60fps</option>
+                            </select>
+                        </div>
+                
+                        <!-- Compression -->
+                        <div class="overlap-12" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
+                            <select name="compression1A" style="width: 100%; border: none; text-align: center;">
+                                <option selected>H.264</option>
+                                <option>H.265</option>
+                                <option>MPEG-4</option>
+                                <option>AV1</option>
+                            </select>
+                        </div>
+                
+                        <!-- Quality -->
+                        <div class="overlap-14" style="width: 9%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 1.5vw;">
+                            <select name="quality1A" style="width: 100%; border: none; text-align: center;">
+                                <option>LOW</option>
+                                <option>MEDIUM</option>
+                                <option selected>GOOD</option>
+                                <option>HIGH</option>
+                                <option>EXCELLENT</option>
+                            </select>
+                        </div>
+                
+                        <!-- Bitrate Mode -->
+                        <div class="overlap-16" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
+                            <select name="bitrate1A" style="width: 100%; border: none; text-align: center;">
+                                <option selected>CBR</option>
+                                <option>VBR</option>
+                            </select>
+                        </div>
+                
+                        <!-- Recording Hours -->
+                        <div class="text-wrapper-19" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 2vw;">
+                            <input type="number" name="recording-hours1A" value="12" style="width: 100%; border: none; text-align: center;" />
+                        </div>
+                
+                        <!-- Retention Days -->
+                        <div class="text-wrapper-20" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 3vw;">
+                            <input type="number" name="retention1A" value="30" style="width: 100%; border: none; text-align: center;" />
+                        </div>
+                    </div>
+                
+                    <!-- STREAM2 Section -->
+                    <div class="frame2">
+                        <div class="overlap-6" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 25vw;">
+                            <input type="text" name="stream1B" value="STREAM2" style="width: 100%; border: none; text-align: center;" />
+                        </div>
+                
+                        <div class="overlap-8" style="width: 11%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
+                            <select name="resolution1B" style="width: 100%; border: none; text-align: center;">
+                                <option selected>1980 x 1080</option>
+                                <option>1280 x 720</option>
+                                <option>640 x 480</option>
+                            </select>
+                        </div>
+                
+                        <div class="overlap-10" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 1.3vw;">
+                            <select name="fps1B" style="width: 100%; border: none; text-align: center;">
+                                <option selected>30fps</option>
+                                <option>60fps</option>
+                            </select>
+                        </div>
+                
+                        <div class="overlap-12" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
+                            <select name="compression1B" style="width: 100%; border: none; text-align: center;">
+                                <option selected>H.264</option>
+                                <option>H.265</option>
+                                <option>MPEG-4</option>
+                                <option>AV1</option>
+                            </select>
+                        </div>
+                
+                        <div class="overlap-14" style="width: 9%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 1.5vw;">
+                            <select name="quality1B" style="width: 100%; border: none; text-align: center;">
+                                <option>LOW</option>
+                                <option>MEDIUM</option>
+                                <option selected>GOOD</option>
+                                <option>HIGH</option>
+                                <option>EXCELLENT</option>
+                            </select>
+                        </div>
+                
+                        <div class="overlap-16" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
+                            <select name="bitrate1B" style="width: 100%; border: none; text-align: center;">
+                                <option selected>CBR</option>
+                                <option>VBR</option>
+                            </select>
+                        </div>
+                
+                        <div class="text-wrapper-19" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 2vw;">
+                            <input type="number" name="recording-hours1B" value="24" style="width: 100%; border: none; text-align: center;" />
+                        </div>
+                
+                        <div class="text-wrapper-20" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 3vw;">
+                            <input type="number" name="retention1B" value="30" style="width: 100%; border: none; text-align: center;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="add-camera">
+            <div class="text-wrapper-23">ADD CAMERA</div>
+        </div>
+        
+        <div class="add-results">
+            <button type="submit" class="text-wrapper-24">
+                RESULTS
+            </button>
+        </div>
+     
+        </form>
+        <div class="overlap-29">
+            <div class="TOTAL-BANDWIDTH">TOTAL BANDWIDTH:___</div>
+            <div class="total-storage">TOTAL STORAGE:___</div>
+            <p class="total-memory">SYSTEM MEMORY (RAM): 32 GB</p>
+            <p class="RECOMMENDED">RECOMMENDED PROCESSORS: Core i3 / AMD Athlon X4 / AMD FX-75xx</p>
+            <img class="download" src="/static/icons/download.png"/>
+        </div>
+        <div class="overlap-31">
+            <p class="ai-header">Need more tailored suggestions? Our AI suggestion has you covered!</p>
+          </div>
+          <div class="overlap-32">
+            <div class="messages">
+                <p class="ai-message">Hi! My name is Selena, how may I help you!?</p> 
+                <p class="user-message">
+                    Hey, I want system requirements for the following requirements:-<br /><br />- There are like 100 cameras
+                    and of atleast 10 types, they are of the similar configuration as I have mentioned above.<br />- The
+                    system needs to be fast as its a high security facility and monitoring needs to be done 24*7.<br />-
+                    Suggest me minimum requirement and the best operating system along with the processor I need.<br />-
+                    Also suggest me where to store the recordings.
+                </p>
+                <p class="ai-message">Hi! My name is Selena, how may I help you!?</p> 
+                <p class="user-message">
+                    Hey, I want system requirements for the following requirements:-<br /><br />- There are like 100 cameras
+                    and of atleast 10 types, they are of the similar configuration as I have mentioned above.<br />- The
+                    system needs to be fast as its a high security facility and monitoring needs to be done 24*7.<br />-
+                    Suggest me minimum requirement and the best operating system along with the processor I need.<br />-
+                    Also suggest me where to store the recordings.
+                </p>
+            </div>
+            <div class="overlap-34">
+                <div class="message-text-input">
+                  <textarea placeholder="Ask anything related to your surveillance setup......"></textarea>
+                </div>
+                <button type="button"><img class="send" src="/static/icons/send.png" /></button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </body>
+  
+    <script>
+    function initializeStreamModes() {
+        const streamSelects = document.querySelectorAll('select[name="stream-mode1"]');
+        streamSelects.forEach(select => {
+            toggleStream2(select);
+        });
+    }
+
+    // Call this on page load
+    window.addEventListener('DOMContentLoaded', initializeStreamModes)
+    // Function to toggle visibility of Stream2 section
+    function toggleStream2(selectElement) {
+        // Find the parent .frame container for this select
+        const cameraFrame = selectElement.closest('.frame');
+        
+        // Get the corresponding .frame2 inside this camera frame
+        const frame2 = cameraFrame.querySelector('.frame2');
+        
+        // Check selected stream mode
+        const streamMode = selectElement.value;
+
+        // Toggle display based on stream mode
+        if (streamMode === "DUAL" || streamMode === "DUAL STREAM") {
+            frame2.style.display = 'flex';
+        } else {
+            frame2.style.display = 'none';
+        }
+    }
+
+
+    // Run once on page load to set initial state
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleStream2();
+        
+        // Add event listener to stream-mode dropdown
+        document.querySelector('select[name="stream-mode"]').addEventListener('change', toggleStream2);
+    });
+
+    let cameraCount = 1;
+
+    document.getElementsByClassName('add-camera')[0].addEventListener('click', () => {
+        cameraCount++;
+
+        // Get the original frame to clone
+        const original = document.querySelector('#camera1');
+
+        // Clone the node
+        const clone = original.cloneNode(true);
+        clone.style.marginTop="5vh";
+        // Set a new ID like camera-2, camera-3, etc.
+        clone.id = `camera${cameraCount}`;
+
+        // Update all `name` attributes inside the clone to be unique (optional but good for form submission)
+        clone.querySelectorAll('[name]').forEach(el => {
+            const name = el.getAttribute('name');
+            if (name) {
+                // Split into base and suffix (like 1A or 1B)
+                const match = name.match(/^([a-z-]+)(\d*)([a-zA-Z]*)$/);
+                if (match) {
+                    const base = match[1];           // e.g. 'stream' or 'camera-count'
+                    const suffix = match[3];         // e.g. 'A' or 'B' or ''
+                    el.setAttribute('name', `${base}${cameraCount}${suffix}`);
+                }
+            }
+        });
+        // Append to the container
+        document.querySelector('.MODEL-BODY').appendChild(clone);
+    });
+
+            // Handle submit
+            document.getElementById("cameraForm").addEventListener("submit", function(e) {
+            e.preventDefault(); // stop page reload
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            fetch("http://localhost:8000/submit-camera-data", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.json()) // or .text() depending on your FastAPI response
+            .then(data => {
+                console.log("Success:", data);
+                 // Update values in the DOM
+                document.querySelector(".TOTAL-BANDWIDTH").innerHTML = `TOTAL BANDWIDTH:&nbsp;&nbsp;${data.data.total_bandwidth} Mbps`;
+                document.querySelector(".total-storage").innerHTML = `TOTAL STORAGE: ${data.data.total_storage} TB`;
+                // document.querySelector(".total-memory").innerHTML = `SYSTEM MEMORY (RAM): ${data.memory}`;
+                // document.querySelector(".RECOMMENDED").innerHTML = `RECOMMENDED PROCESSORS: ${data.processors}`;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Submission failed.");
+            });
+        });
+    </script>
+</html>
