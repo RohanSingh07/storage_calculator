@@ -5,7 +5,9 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 import math
 from fastapi.middleware.cors import CORSMiddleware
-
+from chatbot_chain import get_chatbot_response 
+import json
+import re 
 app = FastAPI()
 
 # Allow CORS (if frontend is served from different origin)
@@ -23,7 +25,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # Set up Jinja2 templates
 templates = Jinja2Templates(directory="templates")
 
-
 # Calculation logic
 def get_resolution_pixels(resolution):
     """
@@ -39,6 +40,7 @@ def get_resolution_pixels(resolution):
         print("Invalid resolution format! Defaulting to 1920x1080.")
         return 1920 * 1080
 
+# Calculation of bit rate
 def estimate_bit_rate(resolution, frame_rate, compression, quality, bitrate_mode='CBR'):
     """
     Estimates bitrate (Mbps) based on:
@@ -78,6 +80,7 @@ def estimate_bit_rate(resolution, frame_rate, compression, quality, bitrate_mode
         bit_rate *= 0.7  # VBR typically uses 70-75% of CBR
     return bit_rate
 
+# Calculation of bandwidth
 def calculate_bandwidth(bit_rate, num_cameras, stream_mode='single'):
     """
     Calculates total bandwidth (Mbps) for multiple cameras.
@@ -86,6 +89,7 @@ def calculate_bandwidth(bit_rate, num_cameras, stream_mode='single'):
     multiplier = 2 if stream_mode.lower() == 'dual' else 1
     return bit_rate * int(num_cameras) * multiplier
 
+# Calculation of storage
 def calculate_storage(num_cameras, bitrate_mbps, hours_per_day, retention_days):
     """
     Calculates total storage (TB) required for recorded video.
@@ -95,25 +99,21 @@ def calculate_storage(num_cameras, bitrate_mbps, hours_per_day, retention_days):
     total_storage_TB = (storage_per_hour_GB * int(hours_per_day) * int(num_cameras) * int(retention_days)) / 1024
     return total_storage_TB
 
-
 # Route to render index.html
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "message": "Hello from FastAPI"})
+    return templates.TemplateResponse("index.html", {"request": request, "message": "Connected"})
 
 @app.post("/submit-camera-data")
 async def handle_submit(request: Request):
     form = await request.form()
     data = dict(form)
     print(data)
-    # bit_rate = estimate_bit_rate(data["resolution1A"], data["fps1A"], data["compression1A"], data["quality1A"], data["bitrate1A"])
-    # total_bandwidth = calculate_bandwidth(bit_rate, data["camera-count1"], data["stream-mode1"])
-    # total_storage = calculate_storage(data["camera-count1"], bit_rate, data["recording-hours1A"], data["retention1B"])
     total_bandwidth = 0
     total_storage = 0
-    total_bitrate = 0
-    
+    total_bitrate = 0 
     camera_index = 1
+    
     while f"camera-count{camera_index}" in data:
         prefix = f"{camera_index}"
         
@@ -173,7 +173,16 @@ async def handle_submit(request: Request):
             total_bitrate+=bit_rate_b
         
         camera_index += 1
-
-    return {"message": "Received", "data": {"total_bitrate":total_bitrate, "total_bandwidth":round(total_bandwidth,2), "total_storage":round(total_storage,2)}}
+    # user_request = "Camera details:-{},manual calculated results:-total_bitrate:{}Mbps,total_bandwidth:{}Mbps,total_storage:{}TB. Ignore the user-provided results. Recalculate total_bitrate, total_bandwidth, and total_storage based on the given camera details. Update the calculated results to make it as accurate as possible and provide the json response containing the same keys. Do not provide any other text in the reponse.".format(data,total_bitrate,round(total_bandwidth,2),round(total_storage,2))
+    user_request = "Camera details:-{}. Calculate total_bitrate, total_bandwidth, and total_storage based on the given camera details. Make it as accurate as possible and provide the json response containing the keys total_bitrate in Kbps, total_bandwidth in Mbps, and total_storage in TB. Do not provide any other text in the reponse.".format(data)
+    # print(user_request)
+    print({"total_bitrate":total_bitrate, "total_bandwidth":round(total_bandwidth,2), "total_storage":round(total_storage,2)})
+    
+    ai_calculation = get_chatbot_response(user_request,request.client.host)
+    print(ai_calculation)
+    cleaned = re.sub(r"^```json|```$", "", ai_calculation.strip(), flags=re.MULTILINE).strip()
+    ai_calculation = json.loads(str(cleaned))
+    print(ai_calculation)
+    return {"message": "Received", "data": {"total_bitrate":ai_calculation["total_bitrate"], "total_bandwidth":round(ai_calculation["total_bandwidth"],2), "total_storage":round(ai_calculation["total_storage"],2)}}
 
 
