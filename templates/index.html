@@ -452,8 +452,9 @@
 
             const form = e.target;
             const formData = new FormData(form);
+            // http://127.0.0.1:8000/submit-camera-data
             // https://storage-calculator.onrender.com/submit-camera-data
-            fetch("http://127.0.0.1:8080/submit-camera-data", {
+            fetch("https://storage-calculator.onrender.com/submit-camera-data", {
                 method: "POST",
                 body: formData,
             })
