@@ -174,11 +174,11 @@
                     </div>
                 </div>
                 <!-- For adding cameras dynamically -->
-                <div class="frame" id="camera" style="display: none;">
+                <div class="frame" id="camera0" style="display: none;">
                     <div class="frame1">
                         <!-- Model -->
                         <div class="overlap-3" style="width: 9%; border: 1px solid black; display: flex; justify-content: center; align-items: center;">
-                            <select name="model1" style="width: 100%; border: none; text-align: center;">
+                            <select name="model0" style="width: 100%; border: none; text-align: center;">
                                 <option value="GENERIC">GENERIC</option>
                                 <option value="AXIS">AXIS</option>
                                 <option value="HIKVISION">HIKVISION</option>
@@ -187,12 +187,12 @@
                 
                         <!-- Camera Count -->
                         <div class="overlap-4" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
-                            <input type="number" name="camera-count1" value="1" style="width: 100%; border: none; text-align: center;" />
+                            <input type="number" name="camera-count0" value="1" style="width: 100%; border: none; text-align: center;" />
                         </div>
                 
                         <!-- Stream Mode -->
                         <div class="overlap-5" style="width: 10%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
-                            <select name="stream-mode1" style="width: 100%; border: none; text-align: center;"  onchange="toggleStream2(this)">
+                            <select name="stream-mode0" style="width: 100%; border: none; text-align: center;"  onchange="toggleStream2(this)">
                                 <option value="SINGLE" selected>SINGLE STREAM</option>
                                 <option value="DUAL">DUAL STREAM</option>
                             </select>
@@ -200,12 +200,12 @@
                 
                         <!-- Stream1 -->
                         <div class="overlap-6" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
-                            <input type="text" name="stream1A" value="STREAM1" style="width: 100%; border: none; text-align: center;" />
+                            <input type="text" name="stream0A" value="STREAM1" style="width: 100%; border: none; text-align: center;" />
                         </div>
                 
                         <!-- Resolution -->
                         <div class="overlap-8" style="width: 11%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
-                            <select name="resolution1A" style="width: 100%; border: none; text-align: center;">
+                            <select name="resolution0A" style="width: 100%; border: none; text-align: center;">
                                 <option selected>1980 x 1080</option>
                                 <option>1280 x 720</option>
                                 <option>640 x 480</option>
@@ -214,7 +214,7 @@
                 
                         <!-- Frame Rate -->
                         <div class="overlap-10" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 1.3vw;">
-                            <select name="fps1A" style="width: 100%; border: none; text-align: center;">
+                            <select name="fps0A" style="width: 100%; border: none; text-align: center;">
                                 <option selected>30fps</option>
                                 <option >60fps</option>
                             </select>
@@ -222,7 +222,7 @@
                 
                         <!-- Compression -->
                         <div class="overlap-12" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
-                            <select name="compression1A" style="width: 100%; border: none; text-align: center;">
+                            <select name="compression0A" style="width: 100%; border: none; text-align: center;">
                                 <option selected>H.264</option>
                                 <option>H.265</option>
                                 <option>MPEG-4</option>
@@ -232,7 +232,7 @@
                 
                         <!-- Quality -->
                         <div class="overlap-14" style="width: 9%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 1.5vw;">
-                            <select name="quality1A" style="width: 100%; border: none; text-align: center;">
+                            <select name="quality0A" style="width: 100%; border: none; text-align: center;">
                                 <option>LOW</option>
                                 <option>MEDIUM</option>
                                 <option selected>GOOD</option>
@@ -243,7 +243,7 @@
                 
                         <!-- Bitrate Mode -->
                         <div class="overlap-16" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
-                            <select name="bitrate1A" style="width: 100%; border: none; text-align: center;">
+                            <select name="bitrate0A" style="width: 100%; border: none; text-align: center;">
                                 <option selected>CBR</option>
                                 <option>VBR</option>
                             </select>
@@ -251,23 +251,23 @@
                 
                         <!-- Recording Hours -->
                         <div class="text-wrapper-19" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 2vw;">
-                            <input type="number" name="recording-hours1A" value="12" style="width: 100%; border: none; text-align: center;" />
+                            <input type="number" name="recording-hours0A" value="12" style="width: 100%; border: none; text-align: center;" />
                         </div>
                 
                         <!-- Retention Days -->
                         <div class="text-wrapper-20" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 3vw;">
-                            <input type="number" name="retention1A" value="30" style="width: 100%; border: none; text-align: center;" />
+                            <input type="number" name="retention0A" value="30" style="width: 100%; border: none; text-align: center;" />
                         </div>
                     </div>
                 
                     <!-- STREAM2 Section -->
                     <div class="frame2">
                         <div class="overlap-6" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 25vw;">
-                            <input type="text" name="stream1B" value="STREAM2" style="width: 100%; border: none; text-align: center;" />
+                            <input type="text" name="stream0B" value="STREAM2" style="width: 100%; border: none; text-align: center;" />
                         </div>
                 
                         <div class="overlap-8" style="width: 11%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
-                            <select name="resolution1B" style="width: 100%; border: none; text-align: center;">
+                            <select name="resolution0B" style="width: 100%; border: none; text-align: center;">
                                 <option selected>1980 x 1080</option>
                                 <option>1280 x 720</option>
                                 <option>640 x 480</option>
@@ -275,14 +275,14 @@
                         </div>
                 
                         <div class="overlap-10" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 1.3vw;">
-                            <select name="fps1B" style="width: 100%; border: none; text-align: center;">
+                            <select name="fps0B" style="width: 100%; border: none; text-align: center;">
                                 <option selected>30fps</option>
                                 <option>60fps</option>
                             </select>
                         </div>
                 
                         <div class="overlap-12" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
-                            <select name="compression1B" style="width: 100%; border: none; text-align: center;">
+                            <select name="compression0B" style="width: 100%; border: none; text-align: center;">
                                 <option selected>H.264</option>
                                 <option>H.265</option>
                                 <option>MPEG-4</option>
@@ -291,7 +291,7 @@
                         </div>
                 
                         <div class="overlap-14" style="width: 9%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 1.5vw;">
-                            <select name="quality1B" style="width: 100%; border: none; text-align: center;">
+                            <select name="quality0B" style="width: 100%; border: none; text-align: center;">
                                 <option>LOW</option>
                                 <option>MEDIUM</option>
                                 <option selected>GOOD</option>
@@ -301,18 +301,18 @@
                         </div>
                 
                         <div class="overlap-16" style="width: 6%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 0.5vw;">
-                            <select name="bitrate1B" style="width: 100%; border: none; text-align: center;">
+                            <select name="bitrate0B" style="width: 100%; border: none; text-align: center;">
                                 <option selected>CBR</option>
                                 <option>VBR</option>
                             </select>
                         </div>
                 
                         <div class="text-wrapper-19" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 2vw;">
-                            <input type="number" name="recording-hours1B" value="24" style="width: 100%; border: none; text-align: center;" />
+                            <input type="number" name="recording-hours0B" value="24" style="width: 100%; border: none; text-align: center;" />
                         </div>
                 
                         <div class="text-wrapper-20" style="width: 8%; border: 1px solid black; display: flex; justify-content: center; align-items: center; margin-left: 3vw;">
-                            <input type="number" name="retention1B" value="30" style="width: 100%; border: none; text-align: center;" />
+                            <input type="number" name="retention0B" value="30" style="width: 100%; border: none; text-align: center;" />
                         </div>
                     </div>
                 </div>
@@ -371,15 +371,21 @@
   </body>
   
     <script>
+    // To hide all the dual camera modes
     function initializeStreamModes() {
         const streamSelects = document.querySelectorAll('select[name="stream-mode1"]');
         streamSelects.forEach(select => {
             toggleStream2(select);
         });
+        const streamSelects0 = document.querySelectorAll('select[name="stream-mode0"]');
+        streamSelects0.forEach(select => {
+            toggleStream2(select);
+        });
     }
-
-    // Call this on page load
+    // // Call this on page load
     window.addEventListener('DOMContentLoaded', initializeStreamModes)
+
+
     // Function to toggle visibility of Stream2 section
     function toggleStream2(selectElement) {
         // Find the parent .frame container for this select
@@ -407,13 +413,6 @@
         }
     }
 
-    // Run once on page load to set initial state
-    document.addEventListener('DOMContentLoaded', function() {
-        toggleStream2();
-        
-        // Add event listener to stream-mode dropdown
-        document.querySelector('select[name="stream-mode"]').addEventListener('change', toggleStream2);
-    });
 
     let cameraCount = 1;
 
@@ -421,7 +420,7 @@
         cameraCount++;
 
         // Get the original frame to clone
-        const original = document.querySelector('#camera');
+        const original = document.querySelector('#camera0');
 
         // Clone the node
         const clone = original.cloneNode(true);
@@ -450,11 +449,20 @@
             document.getElementById("cameraForm").addEventListener("submit", function(e) {
             e.preventDefault(); // stop page reload
 
+
             const form = e.target;
             const formData = new FormData(form);
+            
+            // Get all fields inside #camera0 (your hidden template)
+            const camera0Fields = document.querySelectorAll("#camera0 [name]");
+            // Remove each field's data from FormData
+            camera0Fields.forEach(field => {
+                formData.delete(field.name);
+            });
+
             // http://127.0.0.1:8000/submit-camera-data
             // https://storage-calculator.onrender.com/submit-camera-data
-            fetch("https://storage-calculator.onrender.com/submit-camera-data", {
+            fetch("http://127.0.0.1:8000/submit-camera-data", {
                 method: "POST",
                 body: formData,
             })

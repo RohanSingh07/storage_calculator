@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 import math
 from fastapi.middleware.cors import CORSMiddleware
-from chatbot_chain import get_chatbot_response 
+from chatbot_chain import get_requirements_response 
 import json
 import re 
 app = FastAPI()
@@ -108,7 +108,6 @@ async def read_root(request: Request):
 async def handle_submit(request: Request):
     form = await request.form()
     data = dict(form)
-    print(data)
     total_bandwidth = 0
     total_storage = 0
     total_bitrate = 0 
@@ -174,15 +173,16 @@ async def handle_submit(request: Request):
         
         camera_index += 1
     # user_request = "Camera details:-{},manual calculated results:-total_bitrate:{}Mbps,total_bandwidth:{}Mbps,total_storage:{}TB. Ignore the user-provided results. Recalculate total_bitrate, total_bandwidth, and total_storage based on the given camera details. Update the calculated results to make it as accurate as possible and provide the json response containing the same keys. Do not provide any other text in the reponse.".format(data,total_bitrate,round(total_bandwidth,2),round(total_storage,2))
-    user_request = "Camera details:-{}. Calculate total_bitrate, total_bandwidth, and total_storage based on the given camera details. Make it as accurate as possible and provide the json response containing the keys total_bitrate in Kbps, total_bandwidth in Mbps, and total_storage in TB. Do not provide any other text in the reponse.".format(data)
+    user_request = "{}".format(data)
     # print(user_request)
-    print({"total_bitrate":total_bitrate, "total_bandwidth":round(total_bandwidth,2), "total_storage":round(total_storage,2)})
+    # print({"total_bitrate":total_bitrate, "total_bandwidth":round(total_bandwidth,2), "total_storage":round(total_storage,2)})
     
-    ai_calculation = get_chatbot_response(user_request,request.client.host)
-    print(ai_calculation)
+    ai_calculation = get_requirements_response(user_request,request.client.host)
+    # print(ai_calculation)
     cleaned = re.sub(r"^```json|```$", "", ai_calculation.strip(), flags=re.MULTILINE).strip()
     ai_calculation = json.loads(str(cleaned))
-    print(ai_calculation)
+    # print(ai_calculation)
     return {"message": "Received", "data": {"total_bitrate":ai_calculation["total_bitrate"], "total_bandwidth":round(ai_calculation["total_bandwidth"],2), "total_storage":round(ai_calculation["total_storage"],2)}}
+    
 
 
