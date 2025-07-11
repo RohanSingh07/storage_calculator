@@ -343,27 +343,20 @@
           <div class="overlap-32">
             <div class="messages">
                 <p class="ai-message">Hi! My name is Selena, how may I help you!?</p> 
-                <p class="user-message">
+                <!-- <p class="user-message">
                     Hey, I want system requirements for the following requirements:-<br /><br />- There are like 100 cameras
                     and of atleast 10 types, they are of the similar configuration as I have mentioned above.<br />- The
                     system needs to be fast as its a high security facility and monitoring needs to be done 24*7.<br />-
                     Suggest me minimum requirement and the best operating system along with the processor I need.<br />-
                     Also suggest me where to store the recordings.
-                </p>
-                <p class="ai-message">Hi! My name is Selena, how may I help you!?</p> 
-                <p class="user-message">
-                    Hey, I want system requirements for the following requirements:-<br /><br />- There are like 100 cameras
-                    and of atleast 10 types, they are of the similar configuration as I have mentioned above.<br />- The
-                    system needs to be fast as its a high security facility and monitoring needs to be done 24*7.<br />-
-                    Suggest me minimum requirement and the best operating system along with the processor I need.<br />-
-                    Also suggest me where to store the recordings.
-                </p>
+                </p> -->
+                
             </div>
             <div class="overlap-34">
                 <div class="message-text-input">
-                  <textarea placeholder="Ask anything related to your surveillance setup......"></textarea>
+                  <textarea id="user-input" placeholder="Ask anything related to your surveillance setup......"></textarea>
                 </div>
-                <button type="button"><img class="send" src="/static/icons/send.png" /></button>
+                <button id="user-input-button" type="button"><img class="send" src="/static/icons/send.png" /></button>
             </div>
           </div>
         </div>
@@ -445,41 +438,76 @@
         document.querySelector('.MODEL-BODY').appendChild(clone);
     });
 
-            // Handle submit
-            document.getElementById("cameraForm").addEventListener("submit", function(e) {
-            e.preventDefault(); // stop page reload
+    // Handle submit
+    document.getElementById("cameraForm").addEventListener("submit", function(e) {
+        e.preventDefault(); // stop page reload
 
 
-            const form = e.target;
-            const formData = new FormData(form);
-            
-            // Get all fields inside #camera0 (your hidden template)
-            const camera0Fields = document.querySelectorAll("#camera0 [name]");
-            // Remove each field's data from FormData
-            camera0Fields.forEach(field => {
-                formData.delete(field.name);
-            });
-
-            // http://127.0.0.1:8000/submit-camera-data
-            // https://storage-calculator.onrender.com/submit-camera-data
-            fetch("https://storage-calculator.onrender.com/submit-camera-data", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.json()) // or .text() depending on your FastAPI response
-            .then(data => {
-                console.log("Success:", data);
-                 // Update values in the DOM
-                document.querySelector(".TOTAL-BANDWIDTH").innerHTML = `TOTAL BANDWIDTH:&nbsp;&nbsp;${data.data.total_bandwidth} Mbps`;
-                document.querySelector(".total-storage").innerHTML = `TOTAL STORAGE: ${data.data.total_storage} TB`;
-                // document.querySelector(".total-bitrate").innerHTML = `TOTAL BITRATE: ${data.data.total_bitrate} Kbps`;
-                // document.querySelector(".total-memory").innerHTML = `SYSTEM MEMORY (RAM): ${data.memory}`;
-                // document.querySelector(".RECOMMENDED").innerHTML = `RECOMMENDED PROCESSORS: ${data.processors}`;
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Submission failed.");
-            });
+        const form = e.target;
+        const formData = new FormData(form);
+        
+        // Get all fields inside #camera0 (your hidden template)
+        const camera0Fields = document.querySelectorAll("#camera0 [name]");
+        // Remove each field's data from FormData
+        camera0Fields.forEach(field => {
+            formData.delete(field.name);
         });
+
+        // http://127.0.0.1:8000/submit-camera-data
+        // https://storage-calculator.onrender.com/submit-camera-data
+        fetch("https://storage-calculator.onrender.com/submit-camera-data", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json()) // or .text() depending on your FastAPI response
+        .then(data => {
+            console.log("Success:", data);
+                // Update values in the DOM
+            document.querySelector(".TOTAL-BANDWIDTH").innerHTML = `TOTAL BANDWIDTH:&nbsp;&nbsp;${data.data.total_bandwidth} Mbps`;
+            document.querySelector(".total-storage").innerHTML = `TOTAL STORAGE: ${data.data.total_storage} TB`;
+            // document.querySelector(".total-bitrate").innerHTML = `TOTAL BITRATE: ${data.data.total_bitrate} Kbps`;
+            // document.querySelector(".total-memory").innerHTML = `SYSTEM MEMORY (RAM): ${data.memory}`;
+            // document.querySelector(".RECOMMENDED").innerHTML = `RECOMMENDED PROCESSORS: ${data.processors}`;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Submission failed.");
+        });
+    });
+
+
+    // Chatbot settings
+    document.getElementById("user-input-button").addEventListener("click", function(){
+        var user_message = document.getElementById("user-input").value;
+        if(user_message!==""){
+            document.getElementById("user-input").value = "";
+            var user_p = document.createElement("p");
+            user_p.className = "user-message";
+            user_p.innerHTML = user_message;
+            document.getElementsByClassName("messages")[0].appendChild(user_p);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            fetch("https://storage-calculator.onrender.com/chatbot",{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body:JSON.stringify({ "user_message":user_message })
+            })
+            .then(response=>response.json())
+            .then(data=>{
+                var ai_message = document.createElement("p");
+                ai_message.className = "ai-message";
+                ai_message.innerHTML = data.ai_response;
+                document.getElementsByClassName("messages")[0].appendChild(ai_message);
+
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+                
+            })
+
+        }
+        
+    })
     </script>
 </html>
