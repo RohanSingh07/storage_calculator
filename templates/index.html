@@ -7,6 +7,8 @@
     <script src="https://kit.fontawesome.com/44665516ea.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
   </head>
   <body>
     <div class="desktop">
@@ -442,7 +444,6 @@
     document.getElementById("cameraForm").addEventListener("submit", function(e) {
         e.preventDefault(); // stop page reload
 
-
         const form = e.target;
         const formData = new FormData(form);
         
@@ -455,7 +456,7 @@
 
         // http://127.0.0.1:8000/submit-camera-data
         // https://storage-calculator.onrender.com/submit-camera-data
-        fetch("https://storage-calculator.onrender.com/submit-camera-data", {
+        fetch("https://storage-calculator.onrender.com/submit-camera-data/", {
             method: "POST",
             body: formData,
         })
@@ -475,39 +476,53 @@
         });
     });
 
+    function formatAIResponse(text) {
+        // Convert **bold** to <strong>
+        text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+        
+        // Convert *italic* or _italic_ to <em>
+        text = text.replace(/(\*|_)(.*?)\1/g, "<em>$2</em>");
+        
+        // Convert line breaks (\n) to <br>
+        text = text.replace(/\n/g, "<br>");
+        
+        return text;    
+    }
 
     // Chatbot settings
-    document.getElementById("user-input-button").addEventListener("click", function(){
-        var user_message = document.getElementById("user-input").value;
-        if(user_message!==""){
-            document.getElementById("user-input").value = "";
-            var user_p = document.createElement("p");
-            user_p.className = "user-message";
-            user_p.innerHTML = user_message;
-            document.getElementsByClassName("messages")[0].appendChild(user_p);
+    document.getElementById("user-input-button").addEventListener("click", function () {
+    var user_message = document.getElementById("user-input").value;
+    if (user_message !== "") {
+        document.getElementById("user-input").value = "";
+        var user_p = document.createElement("p");
+        user_p.className = "user-message";
+        user_p.innerHTML = user_message;
+        document.getElementsByClassName("messages")[0].appendChild(user_p);
+
+        // Auto-scroll after user message
+        var messagesDiv = document.getElementsByClassName("messages")[0];
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+        fetch("https://storage-calculator.onrender.com/chatbot", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "user_message": user_message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            var ai_message = document.createElement("p");
+            ai_message.className = "ai-message";
+            // ai_message.innerHTML = data.ai_response;
+            ai_message.innerHTML = formatAIResponse(data.ai_response);
+            messagesDiv.appendChild(ai_message);
+            
+            // Auto-scroll after AI message
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        });
+    }
+});
 
-            fetch("https://storage-calculator.onrender.com/chatbot",{
-                method:"POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body:JSON.stringify({ "user_message":user_message })
-            })
-            .then(response=>response.json())
-            .then(data=>{
-                var ai_message = document.createElement("p");
-                ai_message.className = "ai-message";
-                ai_message.innerHTML = data.ai_response;
-                document.getElementsByClassName("messages")[0].appendChild(ai_message);
-
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-                
-            })
-
-        }
-        
-    })
     </script>
 </html>

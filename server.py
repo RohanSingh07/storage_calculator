@@ -108,6 +108,8 @@ async def read_root(request: Request):
 async def handle_submit(request: Request):
     form = await request.form()
     data = dict(form)
+    print(data)
+    
     # total_bandwidth = 0
     # total_storage = 0
     # total_bitrate = 0 
